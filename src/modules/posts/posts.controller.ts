@@ -14,8 +14,10 @@ import { extname } from 'path';
 import { diskStorage } from 'multer';
 import {FileInterceptor} from '@nestjs/platform-express';
 import { postType } from './entities/posts.entity';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('posts')
+@ApiTags('Posts')
 export class postsController {
 
   constructor(private readonly postsService: postsService) {}

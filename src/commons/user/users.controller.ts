@@ -15,6 +15,7 @@ import { Auth } from 'src/commons/decorators/auth.decorator';
 import { PagePipe } from 'src/commons/pipes/PagePipe';
 import { PerPagePipe } from 'src/commons/pipes/PerPagePipe';
 import { BadRequestException } from '@nestjs/common';
+import { ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
 
 @Controller('users')
 export class UsersController {
@@ -27,8 +28,8 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Auth()
   @Get()
+  // @ApiBearerAuth('JWT-auth')
   findAll(
     @Query('page', PagePipe) page: number,
     @Query('per_page', PerPagePipe) perPage: number,
@@ -44,7 +45,7 @@ export class UsersController {
       }
     });
   }
-  @Auth()
+  
   @Get(':id')
   findByID(
     @Param('id', ParseIntPipe)
@@ -56,7 +57,7 @@ export class UsersController {
       },
     });
   }
-  @Auth()
+
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
